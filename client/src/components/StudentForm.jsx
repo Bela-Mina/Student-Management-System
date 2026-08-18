@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function StudentForm({ onStudentAdded }) {
+function StudentForm({ studentToEdit, onStudentSaved, onCancelEdit }) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -8,6 +8,18 @@ function StudentForm({ onStudentAdded }) {
         year: "",
         phone: ""
     });
+
+    useEffect(() => {
+        if (studentToEdit) {
+            setFormData({
+                name: studentToEdit.name,
+                email: studentToEdit.email,
+                department: studentToEdit.department,
+                year: studentToEdit.year,
+                phone: studentToEdit.phone
+            });
+        }
+    }, [studentToEdit]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -22,27 +34,28 @@ function StudentForm({ onStudentAdded }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(
-                "http://localhost:5000/api/students",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        ...formData,
-                        year: Number(formData.year)
-                    })
-                }
-            );
+            const url = studentToEdit
+                ? `http://localhost:5000/api/students/${studentToEdit._id}`
+                : "http://localhost:5000/api/students";
+
+            const response = await fetch(url, {
+                method: studentToEdit ? "PUT" : "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    ...formData,
+                    year: Number(formData.year)
+                })
+            });
 
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.message || "Failed to create student");
+                throw new Error(data.message || "Request failed");
             }
 
-            onStudentAdded(data.data);
+            onStudentSaved(data.data);
 
             setFormData({
                 name: "",
@@ -52,13 +65,15 @@ function StudentForm({ onStudentAdded }) {
                 phone: ""
             });
         } catch (error) {
-            console.error("Error creating student:", error);
+            console.error("Error saving student:", error);
         }
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Add Student</h2>
+            <h2>
+                {studentToEdit ? "Edit Student" : "Add Student"}
+            </h2>
 
             <input
                 type="text"
@@ -106,8 +121,17 @@ function StudentForm({ onStudentAdded }) {
             />
 
             <button type="submit">
-                Add Student
+                {studentToEdit ? "Save Changes" : "Add Student"}
             </button>
+
+            {studentToEdit && (
+                <button
+                    type="button"
+                    onClick={onCancelEdit}
+                >
+                    Cancel
+                </button>
+            )}
         </form>
     );
 }
