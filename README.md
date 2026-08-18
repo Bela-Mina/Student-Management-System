@@ -38,36 +38,33 @@ Node.js + Express
 
 // Project Structure /
 
+s
+That's enough.
+
+If you want to show the important backend architecture too, use this slightly more detailed version:
+
+## 📂 Project Structure
+
+
 student-management/
 │
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── StudentForm.jsx
-│   │   │   └── StudentList.jsx
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   └── index.css
-│   └── package.json
+├── client/                  # React frontend
 │
-├── server/
-│   ├── config/
-│   │   └── database.js
-│   ├── controllers/
-│   │   └── studentController.js
-│   ├── middleware/
-│   │   └── errorMiddleware.js
-│   ├── models/
-│   │   └── Student.js
-│   ├── routes/
-│   │   └── studentRoutes.js
-│   ├── .env
-│   ├── server.js
-│   └── package.json
+├── server/                  # Node.js + Express backend
+│   ├── config/              # Database configuration
+│   ├── controllers/         # Business logic
+│   ├── middleware/          # Error handling
+│   ├── models/              # MongoDB/Mongoose models
+│   ├── routes/              # API routes
+│   ├── server.js            # Server entry point
+│   └── .env                 # Environment variables
 │
-└── README.md
+├── README.md
+└── .gitignore
 
-//🛠️ Technologies Used //
+
+/🛠️ Technologies Used /
+   
    // Frontend//
 -React
 -JavaScript
