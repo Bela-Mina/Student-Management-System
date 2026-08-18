@@ -17,7 +17,7 @@ The application supports the complete CRUD operations:
 
 The frontend communicates with a RESTful backend API, which stores and manages data in MongoDB.
 
-## 🏗️ System Architecture
+##  System Architecture
 
 text
 React Frontend
@@ -36,7 +36,7 @@ Node.js + Express
       ↓
  React UI
 
-///////  Project Structure ////
+// Project Structure /
 
 student-management/
 │
@@ -67,27 +67,27 @@ student-management/
 │
 └── README.md
 
-/////🛠️ Technologies Used //////
-   /// Frontend///
-React
-JavaScript
-CSS
-Vite
+//🛠️ Technologies Used //
+   // Frontend//
+-React
+-JavaScript
+-CSS
+-Vite
 
-  ///Backend///
-Node.js
-Express.js
-Mongoose
-CORS
+  //Backend//
+-Node.js
+-Express.js
+-Mongoose
+-CORS
 dotenv
 
- /// Database ///
-MongoDB Atlas
-API Testing
-Thunder Client
+ // Database //
+-MongoDB Atlas
+-API Testing
+-Thunder Client
 
 
-//// HTTP Status Codes ////
+// HTTP Status Codes //
 
 The API uses standard HTTP status codes:
 
